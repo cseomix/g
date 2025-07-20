@@ -102,24 +102,7 @@ emerge-webrsync
 
 # Установка исходников ядра и компиляция
 echo "Установка и компиляция ядра..."
-emerge -q sys-kernel/gentoo-sources sys-kernel/linux-firmware sys-apps/pciutils
-cd /usr/src/linux
-make defconfig
-
-# Конфигурация для NVIDIA
-cat << KERNEL_CONFIG >> .config
-CONFIG_DRM=y
-CONFIG_DRM_NVIDIA=n
-CONFIG_DRM_NOUVEAU=m
-CONFIG_ACPI=n
-CONFIG_FW_LOADER=y
-CONFIG_MODULES=y
-CONFIG_MODULE_UNLOAD=y
-KERNEL_CONFIG
-
-make -j12
-make modules_install
-make install
+emerge -q sys-kernel/gentoo-kernel-bin
 
 # Загрузчик
 emerge -q sys-boot/grub
